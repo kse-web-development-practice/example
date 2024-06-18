@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import * as tabStyles from './tab.module.css'
-import * as tabBodyStyles from './tabBody.module.css'
-import * as containerStyles from './container.module.css'
+import tabStyles from './tab.module.css'
+import tabBodyStyles from './tabBody.module.css'
+import containerStyles from './container.module.css'
 import classnames from 'classnames'
 
 export const TabContainer = ({ tabNames, renderTab, renderBody }) => {

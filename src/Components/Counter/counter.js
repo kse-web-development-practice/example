@@ -1,7 +1,7 @@
 import React from 'react'
 
 import classnames from 'classnames'
-import * as styles from './counter.module.css'
+import styles from './counter.module.css'
 import PropTypes from 'prop-types'
 
 export const Counter = ({ value, type, active }) => {

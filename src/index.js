@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import { Layout } from './Components/Layout/layout'
+import { Counter } from './Components/Counter/counter'
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <Layout>
         <p>Hello from React !!!!</p>
         <div>Test</div>
+        <Counter active={true} type="done" value={12} />
       </Layout>
     </div>
   )
