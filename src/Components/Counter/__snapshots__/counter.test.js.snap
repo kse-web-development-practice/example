@@ -2,32 +2,15 @@
 
 exports[`Counter should render 1`] = `
 <div
-  className="undefined"
->
-  <span
-    className="undefined"
-  >
-    Вирішено
-  </span>
-  <span
-    className=""
-  >
-    12
-  </span>
-</div>
-`;
-
-exports[`Counter should work 1`] = `
-<div
   className="counterBlock counterBlockActive"
 >
   <span
     className="counterLabel counterLabelActive"
   >
-    Заявок
+    Вирішено
   </span>
   <span
-    className="counterCount counterCountTotal"
+    className="counterCount"
   >
     12
   </span>
