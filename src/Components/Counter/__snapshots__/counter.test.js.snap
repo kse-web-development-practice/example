@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter should render 1`] = `
+<div
+  className="counterBlock counterBlockActive"
+>
+  <span
+    className="counterLabel counterLabelActive"
+  >
+    Вирішено
+  </span>
+  <span
+    className="counterCount"
+  >
+    12
+  </span>
+</div>
+`;
