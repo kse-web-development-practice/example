@@ -1,6 +1,6 @@
 import React from 'react'
 
-import * as styles from './login.module.css'
+import styles from './login.module.css'
 import PropTypes from 'prop-types'
 
 export const LogIn = ({ isLogged }) => {
