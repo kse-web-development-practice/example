@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --env dev",
     "test": "jest",
+    "test:watch": "jest --watch",
     "dev": "webpack serve --env dev",
     "lint:fix": "eslint ./src/* --fix",
     "lint": "eslint ./src/*",

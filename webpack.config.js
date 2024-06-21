@@ -57,6 +57,9 @@ module.exports = (env) => {
         'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL),
         'process.env.MAP_KEY': localEnv.MAP_KEY
           ? JSON.stringify(localEnv.MAP_KEY)
+          : JSON.stringify(process.env.MAP_KEY),
+        'process.env.API_KEY': localEnv.API_KEY
+          ? JSON.stringify(localEnv.API_KEY)
           : JSON.stringify(process.env.MAP_KEY)
       })
     ],
