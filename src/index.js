@@ -5,7 +5,6 @@ import { Layout } from './Components/Layout/layout'
 import { Counter } from './Components/Counter/counter'
 import userClient from './clients/user'
 
-// eslint-disable-next-line
 userClient.init('https://mapstorage-7e78.restdb.io', process.env.API_KEY, fetch)
 
 const App = () => {
