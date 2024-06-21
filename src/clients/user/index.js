@@ -42,6 +42,10 @@ async function searchUser(searchParams) {
     headers
   })
 
+  if (!res.ok || res.status !== 200) {
+    throw new Error(`Error: ${res.statusText}`)
+  }
+
   const data = await res.json()
   if (data.length < 1) {
     return null
