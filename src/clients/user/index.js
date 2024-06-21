@@ -16,6 +16,20 @@ async function auth(login, password) {
   })
   searchParams.append('q', q)
 
+  return searchUser(searchParams)
+}
+
+async function getUser(token) {
+  const searchParams = new URLSearchParams()
+  const q = JSON.stringify({
+    token
+  })
+  searchParams.append('q', q)
+
+  return searchUser(searchParams)
+}
+
+async function searchUser(searchParams) {
   const url = `${baseUrl}/rest/userlist?${searchParams.toString()}`
 
   const headers = {
@@ -29,7 +43,6 @@ async function auth(login, password) {
   })
 
   const data = await res.json()
-
   if (data.length < 1) {
     return null
   }
@@ -39,5 +52,6 @@ async function auth(login, password) {
 
 export default {
   init,
-  auth
+  auth,
+  getUser
 }
