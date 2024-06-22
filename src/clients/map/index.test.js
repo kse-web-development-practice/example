@@ -77,18 +77,21 @@ describe('Map Client', () => {
       beforeEach(() => {
         fetchMocked.mockResolvedValue(
           new Response(
-            JSON.stringify([
-              {
-                lat: 1,
-                lng: 2,
-                title: 'Test Point'
-              },
-              {
-                lat: 2,
-                lng: 3,
-                title: 'Test Point1'
-              }
-            ]),
+            JSON.stringify({
+              totals: { total: 20, count: 5, skip: 0, max: 5 },
+              data: [
+                {
+                  lat: 1,
+                  lng: 2,
+                  title: 'Test Point'
+                },
+                {
+                  lat: 2,
+                  lng: 3,
+                  title: 'Test Point1'
+                }
+              ]
+            }),
             {
               status: 200,
               statusText: '200 OK'
@@ -101,18 +104,21 @@ describe('Map Client', () => {
 
       describe('where page is not set', () => {
         it('should return array of points', async () => {
-          await expect(mapClient.getList()).resolves.toEqual([
-            {
-              lat: 1,
-              lng: 2,
-              title: 'Test Point'
-            },
-            {
-              lat: 2,
-              lng: 3,
-              title: 'Test Point1'
-            }
-          ])
+          await expect(mapClient.getList()).resolves.toEqual({
+            totals: { total: 20, count: 5, skip: 0, max: 5 },
+            data: [
+              {
+                lat: 1,
+                lng: 2,
+                title: 'Test Point'
+              },
+              {
+                lat: 2,
+                lng: 3,
+                title: 'Test Point1'
+              }
+            ]
+          })
         })
 
         it('should call endpoint', async () => {
@@ -126,18 +132,21 @@ describe('Map Client', () => {
 
       describe('where page is set to 4', () => {
         it('should return array of points', async () => {
-          await expect(mapClient.getList()).resolves.toEqual([
-            {
-              lat: 1,
-              lng: 2,
-              title: 'Test Point'
-            },
-            {
-              lat: 2,
-              lng: 3,
-              title: 'Test Point1'
-            }
-          ])
+          await expect(mapClient.getList()).resolves.toEqual({
+            totals: { total: 20, count: 5, skip: 0, max: 5 },
+            data: [
+              {
+                lat: 1,
+                lng: 2,
+                title: 'Test Point'
+              },
+              {
+                lat: 2,
+                lng: 3,
+                title: 'Test Point1'
+              }
+            ]
+          })
         })
 
         it('should call endpoint', async () => {
