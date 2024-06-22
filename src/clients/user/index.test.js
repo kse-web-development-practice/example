@@ -10,12 +10,12 @@ describe('User Client', () => {
   describe('auth', () => {
     describe('if request is valid', () => {
       beforeEach(() => {
-        fetchMocked.mockResolvedValue({
-          ok: false,
-          status: 500,
-          statusText: 'Server error',
-          json: jest.fn().mockResolvedValue('Server error')
-        })
+        fetchMocked.mockResolvedValue(
+          new Response('Server error', {
+            status: 500,
+            statusText: 'Server error'
+          })
+        )
 
         userClient.init('/', '123123123', fetchMocked)
       })
@@ -30,17 +30,20 @@ describe('User Client', () => {
     describe('if request is valid', () => {
       describe('if a user exists', () => {
         beforeEach(() => {
-          fetchMocked.mockResolvedValue({
-            ok: true,
-            status: 200,
-            statusText: '200 OK',
-            json: jest.fn().mockResolvedValue([
+          fetchMocked.mockResolvedValue(
+            new Response(
+              JSON.stringify([
+                {
+                  login: 'test',
+                  password: 'test'
+                }
+              ]),
               {
-                login: 'test',
-                password: 'test'
+                status: 200,
+                statusText: '200 OK'
               }
-            ])
-          })
+            )
+          )
 
           userClient.init('/', '123123123', fetchMocked)
         })
@@ -59,12 +62,12 @@ describe('User Client', () => {
       })
       describe('if a user does not exist', () => {
         beforeEach(() => {
-          fetchMocked.mockResolvedValue({
-            ok: true,
-            status: 200,
-            statusText: '200 OK',
-            json: jest.fn().mockResolvedValue([])
-          })
+          fetchMocked.mockResolvedValue(
+            new Response(JSON.stringify([]), {
+              status: 200,
+              statusText: '200 OK'
+            })
+          )
 
           userClient.init('/', '123123123', fetchMocked)
         })
@@ -86,18 +89,21 @@ describe('User Client', () => {
   describe('getUser', () => {
     describe('if the token is valid', () => {
       beforeEach(() => {
-        fetchMocked.mockResolvedValue({
-          ok: true,
-          status: 200,
-          statusText: '200 OK',
-          json: jest.fn().mockResolvedValue([
+        fetchMocked.mockResolvedValue(
+          new Response(
+            JSON.stringify([
+              {
+                login: 'test',
+                password: 'test',
+                token: 'some-token'
+              }
+            ]),
             {
-              login: 'test',
-              password: 'test',
-              token: 'some-token'
+              status: 200,
+              statusText: '200 OK'
             }
-          ])
-        })
+          )
+        )
 
         userClient.init('/', '123123123', fetchMocked)
       })
@@ -112,12 +118,12 @@ describe('User Client', () => {
 
     describe('if the token is not valid', () => {
       beforeEach(() => {
-        fetchMocked.mockResolvedValue({
-          ok: true,
-          status: 200,
-          statusText: '200 OK',
-          json: jest.fn().mockResolvedValue([])
-        })
+        fetchMocked.mockResolvedValue(
+          new Response(JSON.stringify([]), {
+            status: 200,
+            statusText: '200 OK'
+          })
+        )
 
         userClient.init('/', '123123123', fetchMocked)
       })
