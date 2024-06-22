@@ -1,0 +1,13 @@
+.button {
+  font-size: 0.8rem;
+  background-color: #21c230;
+  border: 0;
+  padding: 0.6rem 0.8rem;
+  color: #fff;
+  border-radius: 0.3rem;
+}
+
+.button:focus,
+.button:hover {
+  background-color: #199a23;
+}
