@@ -9,7 +9,6 @@ function init(url, key, fetchAPI) {
 }
 
 async function getByBounds(latMin, latMax, lngMin, lngMax) {
-  const searchParams = new URLSearchParams()
   const query = {
     lat: {
       $bt: [latMin, latMax]
@@ -19,7 +18,29 @@ async function getByBounds(latMin, latMax, lngMin, lngMax) {
     }
   }
 
-  searchParams.append('q', JSON.stringify(query))
+  return getData(query)
+}
+
+async function getList(page = 0) {
+  const perPage = 5
+  const skip = perPage * page
+  return getData(null, skip, perPage)
+}
+
+async function getData(query = '', skip, max) {
+  const searchParams = new URLSearchParams()
+  if (query) {
+    searchParams.append('q', JSON.stringify(query))
+  }
+
+  if (skip) {
+    searchParams.append('skip', skip)
+  }
+
+  if (max) {
+    searchParams.append('total', true)
+    searchParams.append('max', max)
+  }
 
   const url = `${baseUrl}/rest/mapitem?${searchParams.toString()}`
 
@@ -47,5 +68,6 @@ async function getByBounds(latMin, latMax, lngMin, lngMax) {
 
 export default {
   init,
-  getByBounds
+  getByBounds,
+  getList
 }
