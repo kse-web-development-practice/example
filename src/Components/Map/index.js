@@ -14,7 +14,6 @@ const center = {
 export const Map = () => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    // eslint-disable-next-line
     googleMapsApiKey: process.env.MAP_KEY
   })
 

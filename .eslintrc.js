@@ -22,5 +22,8 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/no-unescaped-entities': 0
+  },
+  globals: {
+    process: true
   }
 }
