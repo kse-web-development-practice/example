@@ -51,7 +51,9 @@ module.exports = (env) => {
       }),
       new ESLintPlugin({
         exclude: ['node_modules', 'dist'],
-        context: path.resolve(__dirname, 'src')
+        context: path.resolve(__dirname, 'src'),
+        emitWarning: env.dev !== true,
+        emitError: env.dev !== true
       }),
       new webpack.DefinePlugin({
         'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL),
