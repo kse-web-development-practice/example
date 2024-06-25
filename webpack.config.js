@@ -14,7 +14,8 @@ module.exports = (env) => {
     mode: env.dev === true ? 'development' : 'production',
     output: {
       filename: 'main.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
+      publicPath: process.env.BASE_URL ?? '/'
     },
     module: {
       rules: [
@@ -72,9 +73,7 @@ module.exports = (env) => {
       },
       compress: false,
       port: 3000,
-      historyApiFallback: {
-        index: 'index.html'
-      }
+      historyApiFallback: true
     }
   }
 }
