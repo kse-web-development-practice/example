@@ -9,27 +9,22 @@ function init(url, key, fetchAPI) {
 }
 
 async function auth(login, password) {
-  const searchParams = new URLSearchParams()
-  const q = JSON.stringify({
+  return searchUser({
     login,
     password
   })
-  searchParams.append('q', q)
-
-  return searchUser(searchParams)
 }
 
 async function getUser(token) {
-  const searchParams = new URLSearchParams()
-  const q = JSON.stringify({
+  return searchUser({
     token
   })
-  searchParams.append('q', q)
-
-  return searchUser(searchParams)
 }
 
-async function searchUser(searchParams) {
+async function searchUser(query) {
+  const searchParams = new URLSearchParams()
+  searchParams.append('q', JSON.stringify(query))
+
   const url = `${baseUrl}/rest/userlist?${searchParams.toString()}`
 
   const headers = {
