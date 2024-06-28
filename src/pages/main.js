@@ -36,7 +36,7 @@ export const Main = ({ filter }) => {
           tabNames={['Мапа', 'Список']}
           initialTabName={params.page ? 'Список' : 'Мапа'}
           renderTab={(key, onChange, isActive) => (
-            <Tab title={key} isActive={isActive} tabKey={key} onTab={onChange} />
+            <Tab key={key} title={key} isActive={isActive} tabKey={key} onTab={onChange} />
           )}
           renderBody={(activeTab) => {
             return <>{getTabContent(activeTab)}</>
