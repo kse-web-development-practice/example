@@ -35,10 +35,8 @@ export const ListView = () => {
 
   const pages = Array.from({ length: totalPages })
 
-  return isLoading ? (
-    <>Loading</>
-  ) : (
-    <div>
+  return (
+    <div className={styles.listWrapper}>
       <h1>Заявки</h1>
       <ul className={styles.listItems}>
         {points.data?.map((point) => (
@@ -56,6 +54,8 @@ export const ListView = () => {
           </Link>
         ))}
       </div>
+
+      {isLoading && <div className={styles.loading}></div>}
     </div>
   )
 }
