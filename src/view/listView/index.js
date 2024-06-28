@@ -14,7 +14,7 @@ export const ListView = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const [points, setPoints] = useState([])
-  const currentPage = params.page - 1
+  const currentPage = params.page ? params.page - 1 : 0
 
   useEffect(() => {
     const key = CACHE_KEY + currentPage
