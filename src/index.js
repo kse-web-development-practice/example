@@ -1,20 +1,42 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import { Layout } from './Components/Layout/layout'
-import { Counter } from './Components/Counter/counter'
 import userClient from './clients/user'
+import mapClient from './clients/map'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { Main } from './pages/main'
 
+mapClient.init('https://mapstorage-7e78.restdb.io', process.env.API_KEY, fetch)
 userClient.init('https://mapstorage-7e78.restdb.io', process.env.API_KEY, fetch)
+
+const router = createBrowserRouter([
+  {
+    // it renders this element
+    element: <Main filter="total" />,
+
+    // when the URL matches this segment
+    path: '/'
+  },
+  {
+    // it renders this element
+    element: <Main filter="total" />,
+
+    // when the URL matches this segment
+    path: '/total/:page?'
+  },
+  {
+    // it renders this element
+    element: <Main filter="done" />,
+
+    // when the URL matches this segment
+    path: '/closed'
+  }
+])
 
 const App = () => {
   return (
     <div>
-      <Layout>
-        <p>Hello from React !!!!</p>
-        <div>Test</div>
-        <Counter active={true} type="done" value={12} />
-      </Layout>
+      <RouterProvider router={router} />
     </div>
   )
 }

@@ -29,6 +29,7 @@ async function getList(page = 0) {
 
 async function getData(query = '', skip, max) {
   const searchParams = new URLSearchParams()
+
   if (query) {
     searchParams.append('q', JSON.stringify(query))
   }
@@ -38,7 +39,7 @@ async function getData(query = '', skip, max) {
   }
 
   if (max) {
-    searchParams.append('total', true)
+    searchParams.append('totals', true)
     searchParams.append('max', max)
   }
 
@@ -62,7 +63,6 @@ async function getData(query = '', skip, max) {
   if (data.length < 1) {
     return []
   }
-
   return data
 }
 

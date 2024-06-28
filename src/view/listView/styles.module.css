@@ -1,0 +1,36 @@
+.pagination {
+  margin: 1rem auto;
+  display: flex;
+  font-size: 0.8rem;
+  justify-content: center;
+}
+
+.page {
+  color: #1165ff;
+  text-decoration: none;
+  border: 1px solid #cccccc;
+  border-right-width: 0;
+  padding: 0.3rem 0.5rem;
+}
+.pageActive {
+  color: #fff;
+  background-color: #1165ff;
+}
+.pagination .page:first-child {
+  border-radius: 0.4rem 0 0 0.4rem;
+}
+
+.pagination .page:last-child {
+  border-radius: 0 0.4rem 0.4rem 0;
+  border-right-width: 1px;
+}
+
+.listItems {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listItems li {
+  margin: 0 0 0.3rem 0;
+}

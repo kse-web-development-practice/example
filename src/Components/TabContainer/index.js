@@ -5,8 +5,8 @@ import tabBodyStyles from './tabBody.module.css'
 import containerStyles from './container.module.css'
 import classnames from 'classnames'
 
-export const TabContainer = ({ tabNames, renderTab, renderBody }) => {
-  const [activeTab, setActiveTab] = React.useState(tabNames[0])
+export const TabContainer = ({ tabNames, renderTab, renderBody, initialTabName }) => {
+  const [activeTab, setActiveTab] = React.useState(initialTabName ?? tabNames[0])
   const onTabChange = (key) => {
     setActiveTab(key)
   }
@@ -27,7 +27,8 @@ export const TabContainer = ({ tabNames, renderTab, renderBody }) => {
 TabContainer.propTypes = {
   tabNames: PropTypes.arrayOf(PropTypes.string).isRequired,
   renderTab: PropTypes.func.isRequired,
-  renderBody: PropTypes.func.isRequired
+  renderBody: PropTypes.func.isRequired,
+  initialTabName: PropTypes.string
 }
 
 TabContainer.defaultProps = {
@@ -40,7 +41,8 @@ TabContainer.defaultProps = {
       {activeTab === 'Tab1' && <div>Tab 1 is active</div>}
       {activeTab === 'Tab2' && <div>Tab 2 is active</div>}
     </>
-  )
+  ),
+  initialTabName: null
 }
 
 export const Tab = ({ title, isActive, onTab, tabKey }) => {

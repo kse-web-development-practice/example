@@ -1,5 +1,6 @@
 import React from 'react'
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
+import PropTypes from 'prop-types'
 
 const containerStyle = {
   width: '400px',
@@ -11,7 +12,7 @@ const center = {
   lng: -38.523
 }
 
-export const Map = () => {
+export const Map = ({ points }) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: process.env.MAP_KEY
@@ -40,15 +41,22 @@ export const Map = () => {
       onUnmount={onUnmount}
     >
       <>
-        <Marker
-          position={{
-            lat: -3.745,
-            lng: -38.523
-          }}
-        />
+        {points.map((point) => (
+          <Marker
+            key={point._id}
+            position={{
+              lat: point.lat,
+              lng: point.lng
+            }}
+          />
+        ))}
       </>
     </GoogleMap>
   ) : (
     <></>
   )
+}
+
+Map.propTypes = {
+  points: PropTypes.array.isRequired
 }
