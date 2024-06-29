@@ -8,6 +8,58 @@ function init(url, key, fetchAPI) {
   apiKey = key
 }
 
+async function update(item) {
+  const objectId = item._id
+
+  if (!objectId) {
+    throw Error('Item should contain `_id`')
+  }
+
+  const url = `${baseUrl}/rest/mapitem/${item._id}`
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'x-apikey': apiKey
+  }
+
+  const res = await fetchFn(url, {
+    method: 'PATCH',
+    headers,
+    body: JSON.stringify(item)
+  })
+
+  if (!res.ok || res.status !== 200) {
+    throw new Error(`Error: ${res.statusText}`)
+  }
+
+  return true
+}
+
+async function create(title, lat, lng) {
+  const url = `${baseUrl}/rest/mapitem`
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'x-apikey': apiKey
+  }
+
+  const res = await fetchFn(url, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      title,
+      lat,
+      lng
+    })
+  })
+
+  if (!res.ok || res.status !== 201) {
+    throw new Error(`Error: ${res.statusText}`)
+  }
+
+  return await res.json()
+}
+
 async function getByBounds(latMin, latMax, lngMin, lngMax) {
   const query = {
     lat: {
@@ -69,5 +121,7 @@ async function getData(query = '', skip, max) {
 export default {
   init,
   getByBounds,
-  getList
+  getList,
+  create,
+  update
 }
