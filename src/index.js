@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     element: <Main filter="done" />,
 
     // when the URL matches this segment
-    path: '/closed'
+    path: '/closed/:page?'
   }
 ])
 

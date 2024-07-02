@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Layout } from '../Components/Layout/layout'
 import { Header, HeaderLeft, HeaderRight } from '../Components/Header'
 import { Logo } from '../Components/Logo/logo'
@@ -9,9 +9,27 @@ import { Link, useParams } from 'react-router-dom'
 import { Tab, TabContainer } from '../Components/TabContainer'
 import { MapView } from '../view/mapView'
 import { ListView } from '../view/listView'
+import mapItemClient from '../clients/map/index'
 
 export const Main = ({ filter }) => {
   const params = useParams()
+  const [stat, setStat] = useState({
+    total: 0,
+    done: 0
+  })
+
+  useEffect(() => {
+    mapItemClient.getStat().then((stat) => {
+      const total = stat['true']['COUNT isDone'] + stat['false']['COUNT isDone']
+      const done = stat['true']['COUNT isDone']
+
+      setStat({
+        total,
+        done
+      })
+    })
+  }, [])
+
   return (
     <>
       <Layout>
@@ -21,10 +39,10 @@ export const Main = ({ filter }) => {
               <Logo />
             </Link>
             <Link to={'/'}>
-              <Counter active={filter === 'total'} type="total" value={10} />
+              <Counter active={filter === 'total'} type="total" value={stat.total} />
             </Link>
             <Link to={'/closed'}>
-              <Counter active={filter === 'done'} type="done" value={3} />
+              <Counter active={filter === 'done'} type="done" value={stat.done} />
             </Link>
           </HeaderLeft>
           <HeaderRight>
