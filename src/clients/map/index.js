@@ -93,6 +93,26 @@ async function getList(page = 0, filterClosedOnly) {
   return getData(null, skip, perPage)
 }
 
+async function getDetailedInfo(id) {
+  const url = `${baseUrl}/rest/mapitem/${id}}`
+
+  const headers = {
+    'cache-control': 'no-cache',
+    'x-apikey': apiKey
+  }
+
+  const res = await fetchFn(url, {
+    method: 'GET',
+    headers
+  })
+
+  if (!res.ok || res.status !== 200) {
+    throw new Error(`Error: ${res.statusText}`)
+  }
+
+  return await res.json()
+}
+
 async function getData(query = '', skip, max, filter) {
   const searchParams = new URLSearchParams()
   if (filter) {
@@ -140,5 +160,6 @@ export default {
   getList,
   create,
   update,
-  getStat
+  getStat,
+  getDetailedInfo
 }
