@@ -1,0 +1,27 @@
+.detailed {
+  margin: 1rem auto;
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.description {
+  font-size: 1.2rem;
+}
+
+.description p {
+  margin: 1.2rem 0;
+}
+
+.table {
+}
+
+.table td {
+  border: 1px solid #cccccc;
+  padding: 0.5rem;
+}
+.table td:first-child {
+  min-width: 100px;
+}

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
 import PropTypes from 'prop-types'
+import { generatePath } from 'react-router-dom'
 
 const containerStyle = {
   width: '100%',
@@ -60,6 +61,9 @@ export const Map = ({ points }) => {
         {points.map((point) => (
           <Marker
             key={point._id}
+            onClick={() => {
+              location.href = generatePath('/issue/:id', { id: point._id })
+            }}
             position={{
               lat: point.lat,
               lng: point.lng

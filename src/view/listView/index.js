@@ -6,6 +6,7 @@ import mapClient from '../../clients/map'
 import { getCache, setCache } from '../../cache'
 import { generatePath, Link, useMatch, useParams } from 'react-router-dom'
 import styles from './styles.module.css'
+import { LoadingState } from '../../Components/LoadingState'
 
 const CACHE_KEY = 'listView'
 
@@ -63,7 +64,9 @@ export const ListView = () => {
       <h1>Заявки</h1>
       <ul className={styles.listItems}>
         {points.data?.map((point) => (
-          <li key={point._id}>{point.title}</li>
+          <li key={point._id}>
+            <Link to={generatePath('/issue/:id', { id: point._id })}>{point.title}</Link>
+          </li>
         ))}
       </ul>
       <div className={styles.pagination}>
@@ -78,7 +81,7 @@ export const ListView = () => {
         ))}
       </div>
 
-      {isLoading && <div className={styles.loading}></div>}
+      {isLoading && <LoadingState />}
       {/*{isError && <div className={styles.error}>Error! Please, reload the page</div>}*/}
     </div>
   )
