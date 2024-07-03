@@ -60,7 +60,7 @@ async function create(title, lat, lng) {
   return await res.json()
 }
 
-async function getByBounds(latMin, latMax, lngMin, lngMax) {
+async function getByBounds(latMin, latMax, lngMin, lngMax, filterClosedOnly) {
   const query = {
     lat: {
       $bt: [latMin, latMax]
@@ -70,18 +70,34 @@ async function getByBounds(latMin, latMax, lngMin, lngMax) {
     }
   }
 
+  if (filterClosedOnly) {
+    query.isDone = true
+  }
+
   return getData(query)
 }
 
-async function getList(page = 0) {
+async function getStat() {
+  const filter = { $aggregate: ['COUNT:isDone'], $groupby: ['isDone'] }
+  return getData('', undefined, undefined, filter)
+}
+
+async function getList(page = 0, filterClosedOnly) {
   const perPage = 5
   const skip = perPage * page
+
+  if (filterClosedOnly) {
+    return getData({ isDone: true }, skip, perPage)
+  }
+
   return getData(null, skip, perPage)
 }
 
-async function getData(query = '', skip, max) {
+async function getData(query = '', skip, max, filter) {
   const searchParams = new URLSearchParams()
-
+  if (filter) {
+    searchParams.append('h', JSON.stringify(filter))
+  }
   if (query) {
     searchParams.append('q', JSON.stringify(query))
   }
@@ -123,5 +139,6 @@ export default {
   getByBounds,
   getList,
   create,
-  update
+  update,
+  getStat
 }
