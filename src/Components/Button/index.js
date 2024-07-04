@@ -1,13 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import * as styles from './button.module.css'
+import styles from './button.module.css'
 
-export const Button = ({ children }) => {
-  return <button className={styles.button}>{children}</button>
+export const Button = ({ children, onClick = () => {} }) => {
+  return (
+    <button onClick={onClick} className={styles.button}>
+      {children}
+    </button>
+  )
 }
 
 Button.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.node
 }
 
 Button.defaultProps = {

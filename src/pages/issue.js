@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Layout } from '../Components/Layout/layout'
 import { Header, HeaderLeft, HeaderRight } from '../Components/Header'
 import { Logo } from '../Components/Logo/logo'
@@ -7,8 +7,10 @@ import { Link, useParams } from 'react-router-dom'
 import mapItemClient from '../clients/map'
 import { DetailedView } from '../Components/DetailedView'
 import { LoadingState } from '../Components/LoadingState'
+import { UserContext } from '../user-contet'
 
 export const Issue = () => {
+  const userContext = useContext(UserContext)
   const [isLoading, setIsLoading] = useState(false)
   const [item, setItem] = useState(null)
   const params = useParams()
@@ -34,7 +36,11 @@ export const Issue = () => {
             </Link>
           </HeaderLeft>
           <HeaderRight>
-            <LogIn isLogged={false} />
+            {userContext.login ? (
+              <LogIn isLogged={true} onClick={() => userContext.logout()} />
+            ) : (
+              <LogIn isLogged={false} />
+            )}
           </HeaderRight>
         </Header>
         <br />
