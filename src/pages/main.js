@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Layout } from '../Components/Layout/layout'
 import { Header, HeaderLeft, HeaderRight } from '../Components/Header'
 import { Logo } from '../Components/Logo/logo'
@@ -10,8 +10,10 @@ import { Tab, TabContainer } from '../Components/TabContainer'
 import { MapView } from '../view/mapView'
 import { ListView } from '../view/listView'
 import mapItemClient from '../clients/map/index'
+import { UserContext } from '../user-contet'
 
 export const Main = ({ filter }) => {
+  const userContext = useContext(UserContext)
   const params = useParams()
   const [stat, setStat] = useState({
     total: 0,
@@ -46,7 +48,11 @@ export const Main = ({ filter }) => {
             </Link>
           </HeaderLeft>
           <HeaderRight>
-            <LogIn isLogged={false} />
+            {userContext.login ? (
+              <LogIn isLogged={true} onClick={() => userContext.logout()} />
+            ) : (
+              <LogIn isLogged={false} />
+            )}
           </HeaderRight>
         </Header>
         <br />
