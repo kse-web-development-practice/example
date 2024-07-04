@@ -1,21 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { Layout } from '../Components/Layout/layout'
 import { Header, HeaderLeft, HeaderRight } from '../Components/Header'
 import { Logo } from '../Components/Logo/logo'
 import { LogIn } from '../Components/LogIn/login'
-import { generatePath, Link, useParams } from 'react-router-dom'
-import mapItemClient from '../clients/map'
-import { DetailedView } from '../Components/DetailedView'
-import { LoadingState } from '../Components/LoadingState'
-import { UserContext } from '../user-contet'
-import { Button } from '../Components/Button'
+import { Link, useParams } from 'react-router-dom'
 
-export const Issue = () => {
-  const userContext = useContext(UserContext)
+import mapItemClient from '../clients/map'
+import { UserContext } from '../user-contet'
+import { AddItemForm } from '../Components/AddItemForm'
+
+export const Add = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [item, setItem] = useState(null)
   const params = useParams()
   useEffect(() => {
+    if (!params.id) return
+
     setIsLoading(true)
     mapItemClient.getDetailedInfo(params.id).then((item) => {
       setItem(item)
@@ -23,9 +23,22 @@ export const Issue = () => {
     })
   }, [params.id])
 
-  if (isLoading || !item) {
-    return <LoadingState />
-  }
+  const userContext = useContext(UserContext)
+
+  const handleAdding = useCallback(
+    (title, lat, lng) => {
+      if (params.id) {
+        mapItemClient.update({ _id: params.id, title, lat, lng }).then(() => {
+          alert('updated successfully')
+        })
+      } else {
+        mapItemClient.create(title, lat, lng).then(() => {
+          alert('created')
+        })
+      }
+    },
+    [userContext]
+  )
 
   return (
     <>
@@ -45,18 +58,11 @@ export const Issue = () => {
           </HeaderRight>
         </Header>
         <br />
-        <DetailedView
-          title={item.title}
-          description={item.description}
-          lat={item.lat}
-          lng={item.lng}
-        />
-        {userContext.login && (
-          <Button onClick={() => (location.href = generatePath('/edit/:id', { id: item._id }))}>
-            Редагувати
-          </Button>
-        )}
+        {isLoading && <>Loading...</>}
+        <AddItemForm initialItem={item} onAdd={handleAdding} />
       </Layout>
     </>
   )
 }
+
+Add.propTypes = {}

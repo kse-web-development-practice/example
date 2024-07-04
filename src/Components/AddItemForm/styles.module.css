@@ -1,0 +1,38 @@
+.form {
+  margin: 1rem;
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.formRow {
+  margin: 0 0 1rem 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formRowTitle {
+  font-size: 1.1rem;
+}
+
+.formRowGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.input {
+  border: 1px solid #cccccc;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.error {
+  padding: 0.5rem;
+  border: 1px dashed #ba0017;
+  color: #ba0017;
+  background: rgba(255, 67, 67, 0.3);
+  text-align: center;
+  border-radius: 0.3rem;
+}

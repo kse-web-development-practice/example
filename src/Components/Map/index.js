@@ -39,7 +39,7 @@ export const Map = ({ points }) => {
   const fitMap = (map, points) => {
     const bounds = new window.google.maps.LatLngBounds()
 
-    points.forEach((point) => bounds.extend(point))
+    points.forEach((point) => bounds.extend({ lat: Number(point.lat), lng: Number(point.lng) }))
 
     map.fitBounds(bounds)
     map.setZoom(3)
@@ -65,8 +65,8 @@ export const Map = ({ points }) => {
               location.href = generatePath('/issue/:id', { id: point._id })
             }}
             position={{
-              lat: point.lat,
-              lng: point.lng
+              lat: Number(point.lat),
+              lng: Number(point.lng)
             }}
           />
         ))}
