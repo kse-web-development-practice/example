@@ -11,6 +11,7 @@ import { MapView } from '../view/mapView'
 import { ListView } from '../view/listView'
 import mapItemClient from '../clients/map/index'
 import { UserContext } from '../user-contet'
+import { Button } from '../Components/Button'
 
 export const Main = ({ filter }) => {
   const userContext = useContext(UserContext)
@@ -56,6 +57,7 @@ export const Main = ({ filter }) => {
           </HeaderRight>
         </Header>
         <br />
+        {userContext.login && <Button onClick={() => (location.href = '/add')}>Додати</Button>}
         <TabContainer
           tabNames={['Мапа', 'Список']}
           initialTabName={params.page ? 'Список' : 'Мапа'}

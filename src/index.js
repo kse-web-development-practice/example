@@ -8,6 +8,7 @@ import { Main } from './pages/main'
 import { Issue } from './pages/issue'
 import { Auth } from './pages/auth'
 import { UserContext } from './user-contet'
+import { Add } from './pages/add'
 
 mapClient.init('https://mapstorage-7e78.restdb.io', process.env.API_KEY, fetch)
 userClient.init('https://mapstorage-7e78.restdb.io', process.env.API_KEY, fetch)
@@ -47,6 +48,20 @@ const router = createBrowserRouter([
 
     // when the URL matches this segment
     path: '/auth'
+  },
+  {
+    // it renders this element
+    element: <Add />,
+
+    // when the URL matches this segment
+    path: '/add'
+  },
+  {
+    // it renders this element
+    element: <Add />,
+
+    // when the URL matches this segment
+    path: '/edit/:id'
   }
 ])
 

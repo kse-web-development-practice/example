@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button } from '../Button'
 import styles from './styles.module.css'
 import PropTypes from 'prop-types'
+import { Input } from '../Input'
 
 export const LoginForm = ({ onAuth }) => {
   const [login, setLogin] = useState('')
@@ -16,17 +17,11 @@ export const LoginForm = ({ onAuth }) => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.formRow}>
-        <input
-          className={styles.input}
-          onChange={(event) => setLogin(event.target.value)}
-          placeholder="login"
-          type="text"
-        />
+        <Input onChange={(event) => setLogin(event.target.value)} placeholder="login" type="text" />
       </div>
       <div className={styles.formRow}>
-        <input
+        <Input
           onChange={(event) => setPassword(event.target.value)}
-          className={styles.input}
           placeholder="password"
           type="password"
         />
