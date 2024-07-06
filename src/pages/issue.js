@@ -3,7 +3,7 @@ import { Layout } from '../Components/Layout/layout'
 import { Header, HeaderLeft, HeaderRight } from '../Components/Header'
 import { Logo } from '../Components/Logo/logo'
 import { LogIn } from '../Components/LogIn/login'
-import { generatePath, Link, useParams } from 'react-router-dom'
+import { generatePath, Link, useNavigate, useParams } from 'react-router-dom'
 import mapItemClient from '../clients/map'
 import { DetailedView } from '../Components/DetailedView'
 import { LoadingState } from '../Components/LoadingState'
@@ -15,6 +15,7 @@ export const Issue = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [item, setItem] = useState(null)
   const params = useParams()
+  const navigate = useNavigate()
   useEffect(() => {
     setIsLoading(true)
     mapItemClient.getDetailedInfo(params.id).then((item) => {
@@ -40,7 +41,7 @@ export const Issue = () => {
             {userContext.login ? (
               <LogIn isLogged={true} onClick={() => userContext.logout()} />
             ) : (
-              <LogIn isLogged={false} onClick={() => (location.href = '/auth')} />
+              <LogIn isLogged={false} onClick={() => navigate('/auth')} />
             )}
           </HeaderRight>
         </Header>
@@ -52,7 +53,7 @@ export const Issue = () => {
           lng={item.lng}
         />
         {userContext.login && (
-          <Button onClick={() => (location.href = generatePath('/edit/:id', { id: item._id }))}>
+          <Button onClick={() => navigate(generatePath('/edit/:id', { id: item._id }))}>
             Редагувати
           </Button>
         )}

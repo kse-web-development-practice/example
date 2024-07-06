@@ -3,7 +3,7 @@ import { Layout } from '../Components/Layout/layout'
 import { Header, HeaderLeft, HeaderRight } from '../Components/Header'
 import { Logo } from '../Components/Logo/logo'
 import { LogIn } from '../Components/LogIn/login'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import mapItemClient from '../clients/map'
 import { UserContext } from '../user-contet'
@@ -13,6 +13,7 @@ export const Add = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [item, setItem] = useState(null)
   const params = useParams()
+  const navigate = useNavigate()
   useEffect(() => {
     if (!params.id) return
 
@@ -53,7 +54,7 @@ export const Add = () => {
             {userContext.login ? (
               <LogIn isLogged={true} onClick={() => userContext.logout()} />
             ) : (
-              <LogIn isLogged={false} onClick={() => (location.href = '/auth')} />
+              <LogIn isLogged={false} onClick={() => navigate('/auth')} />
             )}
           </HeaderRight>
         </Header>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
 import PropTypes from 'prop-types'
-import { generatePath } from 'react-router-dom'
+import { generatePath, useNavigate } from 'react-router-dom'
 
 const containerStyle = {
   width: '100%',
@@ -14,6 +14,7 @@ const center = {
 }
 
 export const Map = ({ points }) => {
+  const navigate = useNavigate()
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: process.env.MAP_KEY
@@ -62,7 +63,7 @@ export const Map = ({ points }) => {
           <Marker
             key={point._id}
             onClick={() => {
-              location.href = generatePath('/issue/:id', { id: point._id })
+              navigate(generatePath('/issue/:id', { id: point._id }))
             }}
             position={{
               lat: Number(point.lat),

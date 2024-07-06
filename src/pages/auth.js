@@ -3,7 +3,7 @@ import { Layout } from '../Components/Layout/layout'
 import { Header, HeaderLeft, HeaderRight } from '../Components/Header'
 import { Logo } from '../Components/Logo/logo'
 import { LogIn } from '../Components/LogIn/login'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { LoginForm } from '../Components/LoginForm'
 import userClient from '../clients/user'
@@ -12,6 +12,7 @@ import { UserContext } from '../user-contet'
 export const Auth = () => {
   const userContext = useContext(UserContext)
   const [error, setError] = useState(null)
+  const navigate = useNavigate()
   const handleAuth = useCallback(
     (login, pasword) => {
       userClient.auth(login, pasword).then((user) => {
@@ -21,7 +22,7 @@ export const Auth = () => {
         }
         setError(null)
         userContext.setUser(user.login, user.token)
-        location.href = '/'
+        navigate('/')
       })
     },
     [userContext]
@@ -40,7 +41,7 @@ export const Auth = () => {
             {userContext.login ? (
               <LogIn isLogged={true} onClick={() => userContext.logout()} />
             ) : (
-              <LogIn isLogged={false} onClick={() => (location.href = '/auth')} />
+              <LogIn isLogged={false} onClick={() => navigate('/auth')} />
             )}
           </HeaderRight>
         </Header>
