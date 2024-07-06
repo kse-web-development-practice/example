@@ -53,7 +53,7 @@ export const Add = () => {
             {userContext.login ? (
               <LogIn isLogged={true} onClick={() => userContext.logout()} />
             ) : (
-              <LogIn isLogged={false} />
+              <LogIn isLogged={false} onClick={() => (location.href = '/auth')} />
             )}
           </HeaderRight>
         </Header>
