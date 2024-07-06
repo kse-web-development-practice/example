@@ -26,9 +26,9 @@ export const Add = () => {
   const userContext = useContext(UserContext)
 
   const handleAdding = useCallback(
-    (title, lat, lng) => {
+    (title, lat, lng, description) => {
       if (params.id) {
-        mapItemClient.update({ _id: params.id, title, lat, lng }).then(() => {
+        mapItemClient.update({ _id: params.id, title, lat, lng, description }).then(() => {
           alert('updated successfully')
         })
       } else {
