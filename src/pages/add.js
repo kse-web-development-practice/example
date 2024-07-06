@@ -8,9 +8,13 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import mapItemClient from '../clients/map'
 import { UserContext } from '../user-contet'
 import { AddItemForm } from '../Components/AddItemForm'
+import { SuccessMessage } from '../Components/SuccessMessage'
 
 export const Add = () => {
   const [isLoading, setIsLoading] = useState(false)
+  const [isRequesting, setIsRequesting] = useState(false)
+  const [succesMessage, setSuccesMessage] = useState(null)
+
   const [item, setItem] = useState(null)
   const params = useParams()
   const navigate = useNavigate()
@@ -28,14 +32,30 @@ export const Add = () => {
 
   const handleAdding = useCallback(
     (title, lat, lng, description) => {
+      setIsRequesting(true)
       if (params.id) {
-        mapItemClient.update({ _id: params.id, title, lat, lng, description }).then(() => {
-          alert('updated successfully')
-        })
+        mapItemClient
+          .update({ _id: params.id, title, lat, lng, description })
+          .then(() => {
+            setSuccesMessage('Успішно оновлено!')
+
+            setTimeout(() => {
+              navigate('/')
+            }, 1000)
+          })
+          .finally(() => setIsRequesting(false))
       } else {
-        mapItemClient.create(title, lat, lng).then(() => {
-          alert('created')
-        })
+        mapItemClient
+          .create(title, lat, lng)
+          .then(() => {
+            setSuccesMessage('Успішно додано!')
+            setIsRequesting(false)
+
+            setTimeout(() => {
+              navigate('/')
+            }, 1000)
+          })
+          .finally(() => setIsRequesting(false))
       }
     },
     [userContext]
@@ -60,7 +80,12 @@ export const Add = () => {
         </Header>
         <br />
         {isLoading && <>Loading...</>}
-        <AddItemForm initialItem={item} onAdd={handleAdding} />
+        {succesMessage && <SuccessMessage message={succesMessage} />}
+        <AddItemForm
+          initialItem={item}
+          onAdd={handleAdding}
+          disabled={isRequesting || !!succesMessage}
+        />
       </Layout>
     </>
   )

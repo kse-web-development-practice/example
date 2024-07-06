@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './button.module.css'
 
-export const Button = ({ children, onClick = () => {} }) => {
+export const Button = ({ children, onClick = () => {}, disabled = false }) => {
   return (
-    <button onClick={onClick} className={styles.button}>
+    <button disabled={disabled} onClick={onClick} className={styles.button}>
       {children}
     </button>
   )
@@ -12,7 +12,8 @@ export const Button = ({ children, onClick = () => {} }) => {
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  onClick: PropTypes.node
+  onClick: PropTypes.node,
+  disabled: PropTypes.bool
 }
 
 Button.defaultProps = {

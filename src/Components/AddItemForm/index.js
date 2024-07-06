@@ -6,7 +6,7 @@ import { Input } from '../Input'
 import { Textarea } from '../Textarea'
 import { ErrorMessage } from '../ErrorMessage'
 
-export const AddItemForm = ({ onAdd, errorMessage = '', initialItem = {} }) => {
+export const AddItemForm = ({ onAdd, errorMessage = '', initialItem = {}, disabled = false }) => {
   const [title, setTitle] = useState('')
   const [lat, setLat] = useState(0)
   const [lng, setLng] = useState(0)
@@ -52,7 +52,7 @@ export const AddItemForm = ({ onAdd, errorMessage = '', initialItem = {} }) => {
         />
       </label>
       <div className={styles.formRow}>
-        <Button>Додати</Button>
+        <Button disabled={disabled}>Додати</Button>
       </div>
       {errorMessage && <ErrorMessage errorMessage={errorMessage} />}
     </form>
@@ -62,5 +62,6 @@ export const AddItemForm = ({ onAdd, errorMessage = '', initialItem = {} }) => {
 AddItemForm.propTypes = {
   onAdd: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
-  initialItem: PropTypes.object
+  initialItem: PropTypes.object,
+  disabled: PropTypes.bool
 }
