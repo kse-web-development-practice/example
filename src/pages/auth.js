@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import { Layout } from '../Components/Layout/layout'
 import { Header, HeaderLeft, HeaderRight } from '../Components/Header'
 import { Logo } from '../Components/Logo/logo'
@@ -11,13 +11,17 @@ import { UserContext } from '../user-contet'
 
 export const Auth = () => {
   const userContext = useContext(UserContext)
+  const [error, setError] = useState(null)
   const handleAuth = useCallback(
     (login, pasword) => {
       userClient.auth(login, pasword).then((user) => {
         if (!user) {
-          alert('Used does not exist')
+          setError('Used does not exist')
+          return
         }
+        setError(null)
         userContext.setUser(user.login, user.token)
+        location.href = '/'
       })
     },
     [userContext]
@@ -36,12 +40,12 @@ export const Auth = () => {
             {userContext.login ? (
               <LogIn isLogged={true} onClick={() => userContext.logout()} />
             ) : (
-              <LogIn isLogged={false} />
+              <LogIn isLogged={false} onClick={() => (location.href = '/auth')} />
             )}
           </HeaderRight>
         </Header>
         <br />
-        <LoginForm onAuth={handleAuth} />
+        <LoginForm onAuth={handleAuth} error={error} />
       </Layout>
     </>
   )

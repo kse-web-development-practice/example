@@ -4,6 +4,7 @@ import styles from './styles.module.css'
 import PropTypes from 'prop-types'
 import { Input } from '../Input'
 import { Textarea } from '../Textarea'
+import { ErrorMessage } from '../ErrorMessage'
 
 export const AddItemForm = ({ onAdd, errorMessage = '', initialItem = {} }) => {
   const [title, setTitle] = useState('')
@@ -53,7 +54,7 @@ export const AddItemForm = ({ onAdd, errorMessage = '', initialItem = {} }) => {
       <div className={styles.formRow}>
         <Button>Додати</Button>
       </div>
-      {errorMessage && <div className={styles.error}>{errorMessage}</div>}
+      {errorMessage && <ErrorMessage errorMessage={errorMessage} />}
     </form>
   )
 }
