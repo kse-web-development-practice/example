@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '../Button'
 import styles from './styles.module.css'
 import PropTypes from 'prop-types'
@@ -6,11 +6,28 @@ import { Input } from '../Input'
 import { Textarea } from '../Textarea'
 import { ErrorMessage } from '../ErrorMessage'
 
-export const AddItemForm = ({ onAdd, errorMessage = '', initialItem = {} }) => {
+export const AddItemForm = ({ onAdd, errorMessage = '', initialItem = {}, disabled = false }) => {
   const [title, setTitle] = useState('')
   const [lat, setLat] = useState(0)
   const [lng, setLng] = useState(0)
   const [description, setDescription] = useState('')
+
+  useEffect(() => {
+    if (!initialItem) {
+      return
+    }
+
+    setTitle(initialItem.title)
+    setLat(initialItem.lat)
+    setLng(initialItem.lng)
+    setDescription(initialItem.description)
+  }, [
+    initialItem,
+    initialItem?.title,
+    initialItem?.lat,
+    initialItem?.lng,
+    initialItem?.description
+  ])
 
   const handleSubmit = (e) => {
     onAdd(title, lat, lng, description)
@@ -52,7 +69,7 @@ export const AddItemForm = ({ onAdd, errorMessage = '', initialItem = {} }) => {
         />
       </label>
       <div className={styles.formRow}>
-        <Button>Додати</Button>
+        <Button disabled={disabled}>Додати</Button>
       </div>
       {errorMessage && <ErrorMessage errorMessage={errorMessage} />}
     </form>
@@ -62,5 +79,6 @@ export const AddItemForm = ({ onAdd, errorMessage = '', initialItem = {} }) => {
 AddItemForm.propTypes = {
   onAdd: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
-  initialItem: PropTypes.object
+  initialItem: PropTypes.object,
+  disabled: PropTypes.bool
 }

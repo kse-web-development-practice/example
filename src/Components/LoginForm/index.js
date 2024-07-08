@@ -27,7 +27,7 @@ export const LoginForm = ({ onAuth, error = null }) => {
           type="password"
         />
       </div>
-      {error && <ErrorMessage errorMessage="something went wrong" />}
+      {error && <ErrorMessage errorMessage={error} />}
       <div className={styles.formRow}>
         <Button>Авторизуватись</Button>
       </div>

@@ -4,9 +4,11 @@ import PropTypes from 'prop-types'
 
 export const Textarea = ({ onChange = '', defaultValue = '' }) => {
   return (
-    <textarea className={styles.textarea} onChange={onChange}>
-      {defaultValue}
-    </textarea>
+    <textarea
+      defaultValue={defaultValue}
+      className={styles.textarea}
+      onChange={onChange}
+    ></textarea>
   )
 }
 

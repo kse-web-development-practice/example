@@ -5,7 +5,7 @@ import { Logo } from '../Components/Logo/logo'
 import { Counter } from '../Components/Counter/counter'
 import { LogIn } from '../Components/LogIn/login'
 import PropTypes from 'prop-types'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Tab, TabContainer } from '../Components/TabContainer'
 import { MapView } from '../view/mapView'
 import { ListView } from '../view/listView'
@@ -16,6 +16,7 @@ import { Button } from '../Components/Button'
 export const Main = ({ filter }) => {
   const userContext = useContext(UserContext)
   const params = useParams()
+  const navigate = useNavigate()
   const [stat, setStat] = useState({
     total: 0,
     done: 0
@@ -52,12 +53,12 @@ export const Main = ({ filter }) => {
             {userContext.login ? (
               <LogIn isLogged={true} onClick={() => userContext.logout()} />
             ) : (
-              <LogIn isLogged={false} onClick={() => (location.href = '/auth')} />
+              <LogIn isLogged={false} onClick={() => navigate('/auth')} />
             )}
           </HeaderRight>
         </Header>
         <br />
-        {userContext.login && <Button onClick={() => (location.href = '/add')}>Додати</Button>}
+        {userContext.login && <Button onClick={() => navigate('/add')}>Додати</Button>}
         <TabContainer
           tabNames={['Мапа', 'Список']}
           initialTabName={params.page ? 'Список' : 'Мапа'}
