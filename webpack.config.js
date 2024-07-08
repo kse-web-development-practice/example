@@ -71,7 +71,7 @@ module.exports = (env) => {
           : JSON.stringify(process.env.MAP_KEY),
         'process.env.API_KEY': localEnv.API_KEY
           ? JSON.stringify(localEnv.API_KEY)
-          : JSON.stringify(process.env.MAP_KEY)
+          : JSON.stringify(process.env.API_KEY)
       })
     ],
     devtool: env.dev ? 'eval-source-map' : 'source-map',
