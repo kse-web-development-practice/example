@@ -47,11 +47,14 @@ jobs:
         with:
           node-version: '18.x'
       - uses: actions/cache@v3
+        env:
+          MAP_KEY: ${{ secrets.MAP_KEY }}
+          API_KEY: ${{ secrets.API_KEY }}
         with:
           key: ${{ runner.os }}-build-dependencies-${{ hashFiles('**/package-lock.json') }}
           path: |
             ./node_modules
-      - run: BASE_URL=/${{ github.event.repository.name }} npm run build
+      - run: BASE_URL=/${{ github.event.repository.name }} MAP_KEY=$MAP_KEY API_KEY=$API_KEY npm run build
       - name: Archive artifacts
         uses: actions/upload-artifact@v4
         with:
