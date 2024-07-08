@@ -13,57 +13,63 @@ import { Add } from './pages/add'
 mapClient.init('https://mapstorage-7e78.restdb.io', process.env.API_KEY, fetch)
 userClient.init('https://mapstorage-7e78.restdb.io', process.env.API_KEY, fetch)
 
-const router = createBrowserRouter([
-  {
-    // it renders this element
-    element: <Main filter="total" />,
+const router = createBrowserRouter(
+  [
+    {
+      // it renders this element
+      element: <Main filter="total" />,
 
-    // when the URL matches this segment
-    path: '/'
-  },
-  {
-    // it renders this element
-    element: <Main filter="total" />,
+      // when the URL matches this segment
+      path: '/'
+    },
+    {
+      // it renders this element
+      element: <Main filter="total" />,
 
-    // when the URL matches this segment
-    path: '/total/:page?'
-  },
-  {
-    // it renders this element
-    element: <Main filter="done" />,
+      // when the URL matches this segment
+      path: '/total/:page?'
+    },
+    {
+      // it renders this element
+      element: <Main filter="done" />,
 
-    // when the URL matches this segment
-    path: '/closed/:page?'
-  },
-  {
-    // it renders this element
-    element: <Issue />,
+      // when the URL matches this segment
+      path: '/closed/:page?'
+    },
+    {
+      // it renders this element
+      element: <Issue />,
 
-    // when the URL matches this segment
-    path: '/issue/:id'
-  },
-  {
-    // it renders this element
-    element: <Auth />,
+      // when the URL matches this segment
+      path: '/issue/:id'
+    },
+    {
+      // it renders this element
+      element: <Auth />,
 
-    // when the URL matches this segment
-    path: '/auth'
-  },
-  {
-    // it renders this element
-    element: <Add />,
+      // when the URL matches this segment
+      path: '/auth'
+    },
+    {
+      // it renders this element
+      element: <Add />,
 
-    // when the URL matches this segment
-    path: '/add'
-  },
-  {
-    // it renders this element
-    element: <Add />,
+      // when the URL matches this segment
+      path: '/add'
+    },
+    {
+      // it renders this element
+      element: <Add />,
 
-    // when the URL matches this segment
-    path: '/edit/:id'
+      // when the URL matches this segment
+      path: '/edit/:id'
+    }
+  ],
+  {
+    // eslint-disable-next-line no-undef
+    basename: process.env.BASE_URL ? process.env.BASE_URL : '/'
   }
-])
+)
 
 const App = () => {
   const [login, setLogin] = useState(null)
