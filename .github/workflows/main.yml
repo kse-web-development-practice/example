@@ -51,7 +51,9 @@ jobs:
           key: ${{ runner.os }}-build-dependencies-${{ hashFiles('**/package-lock.json') }}
           path: |
             ./node_modules
-      - run: BASE_URL=/${{ github.event.repository.name }} npm run build
+      - run: |
+          echo ${{ secrets.MAP_KEY }}
+          BASE_URL=/${{ github.event.repository.name }} npm run build
       - name: Archive artifacts
         uses: actions/upload-artifact@v4
         with:
