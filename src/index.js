@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 
 import userClient from './clients/user'
 import mapClient from './clients/map'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createHashRouter, RouterProvider } from 'react-router-dom'
 import { Main } from './pages/main'
 import { Issue } from './pages/issue'
 import { Auth } from './pages/auth'
@@ -13,7 +13,7 @@ import { Add } from './pages/add'
 mapClient.init('https://mapstorage-7e78.restdb.io', process.env.API_KEY, fetch)
 userClient.init('https://mapstorage-7e78.restdb.io', process.env.API_KEY, fetch)
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   [
     {
       // it renders this element
