@@ -13,9 +13,10 @@ module.exports = (env) => {
     entry: './src/index.js',
     mode: env.dev === true ? 'development' : 'production',
     output: {
-      filename: 'main.js',
+      filename: '[name]-[fullhash].js',
       path: path.resolve(__dirname, 'dist'),
-      publicPath: process.env.BASE_URL ?? '/'
+      publicPath: process.env.BASE_URL ?? '/',
+      clean: true
     },
     module: {
       rules: [
@@ -71,7 +72,7 @@ module.exports = (env) => {
           : JSON.stringify(process.env.MAP_KEY),
         'process.env.API_KEY': localEnv.API_KEY
           ? JSON.stringify(localEnv.API_KEY)
-          : JSON.stringify(process.env.MAP_KEY)
+          : JSON.stringify(process.env.API_KEY)
       })
     ],
     devtool: env.dev ? 'eval-source-map' : 'source-map',
