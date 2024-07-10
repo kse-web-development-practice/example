@@ -49,7 +49,8 @@ async function create(title, lat, lng) {
     body: JSON.stringify({
       title,
       lat,
-      lng
+      lng,
+      isDone: false
     })
   })
 
