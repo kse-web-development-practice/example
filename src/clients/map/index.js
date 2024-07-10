@@ -35,7 +35,7 @@ async function update(item) {
   return true
 }
 
-async function create(title, lat, lng) {
+async function create(title, lat, lng, description) {
   const url = `${baseUrl}/rest/mapitem`
 
   const headers = {
@@ -49,7 +49,8 @@ async function create(title, lat, lng) {
     body: JSON.stringify({
       title,
       lat,
-      lng
+      lng,
+      description
     })
   })
 
