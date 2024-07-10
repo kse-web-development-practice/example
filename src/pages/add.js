@@ -46,7 +46,7 @@ export const Add = () => {
           .finally(() => setIsRequesting(false))
       } else {
         mapItemClient
-          .create(title, lat, lng)
+          .create(title, lat, lng, description)
           .then(() => {
             setSuccesMessage('Успішно додано!')
             setIsRequesting(false)
