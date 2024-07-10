@@ -24,7 +24,10 @@ export const Main = ({ filter }) => {
 
   useEffect(() => {
     mapItemClient.getStat().then((stat) => {
-      const total = stat['true']['COUNT isDone'] + stat['false']['COUNT isDone']
+      const total =
+        stat['true']['COUNT isDone'] +
+        stat['false']['COUNT isDone'] +
+        stat['undefined']['COUNT isDone']
       const done = stat['true']['COUNT isDone']
 
       setStat({

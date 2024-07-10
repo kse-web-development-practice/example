@@ -59,7 +59,7 @@ describe('Map Client', () => {
         it('should call endpoint', async () => {
           await mapClient.getList()
           expect(fetchMocked).toBeCalledWith(
-            'http://some.com/rest/mapitem?total=true&max=5',
+            'http://some.com/rest/mapitem?totals=true&max=5',
             expect.any(Object)
           )
         })
@@ -87,7 +87,7 @@ describe('Map Client', () => {
         it('should call endpoint', async () => {
           await mapClient.getList(4)
           expect(fetchMocked).toBeCalledWith(
-            'http://some.com/rest/mapitem?skip=20&total=true&max=5',
+            'http://some.com/rest/mapitem?skip=20&totals=true&max=5',
             expect.any(Object)
           )
         })
