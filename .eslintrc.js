@@ -16,9 +16,10 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:prettier/recommended',
-    'plugin:storybook/recommended'
+    'plugin:storybook/recommended',
+    'plugin:cypress/recommended'
   ],
-  plugins: ['react', 'react-hooks', 'jest'],
+  plugins: ['react', 'react-hooks', 'jest', 'cypress'],
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/no-unescaped-entities': 0
