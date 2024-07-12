@@ -65,6 +65,7 @@ export const ListView = () => {
       <ul className={styles.listItems}>
         {points.data?.map((point) => (
           <li key={point._id}>
+            {point.isDone ? <>✅</> : <>🚧</>}{' '}
             <Link to={generatePath('/issue/:id', { id: point._id })}>{point.title}</Link>
           </li>
         ))}

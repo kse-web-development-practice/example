@@ -9,13 +9,18 @@ import { DetailedView } from '../Components/DetailedView'
 import { LoadingState } from '../Components/LoadingState'
 import { UserContext } from '../user-contet'
 import { Button } from '../Components/Button'
+import styles from './styles.module.css'
+import { ErrorMessage } from '../Components/ErrorMessage'
+import { Counters } from './parts/Counters'
 
 export const Issue = () => {
   const userContext = useContext(UserContext)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
   const [item, setItem] = useState(null)
   const params = useParams()
   const navigate = useNavigate()
+
   useEffect(() => {
     setIsLoading(true)
     mapItemClient.getDetailedInfo(params.id).then((item) => {
@@ -28,6 +33,22 @@ export const Issue = () => {
     return <LoadingState />
   }
 
+  const markAsDone = () => {
+    setIsLoading(true)
+    mapItemClient
+      .update({
+        _id: params.id,
+        isDone: true
+      })
+      .then((item) => {
+        setItem(item)
+        setIsLoading(false)
+      })
+      .catch(() => {
+        setError('Не вдалось оновити запис')
+      })
+  }
+
   return (
     <>
       <Layout>
@@ -36,6 +57,7 @@ export const Issue = () => {
             <Link to={'/'}>
               <Logo />
             </Link>
+            <Counters />
           </HeaderLeft>
           <HeaderRight>
             {userContext.login ? (
@@ -51,11 +73,20 @@ export const Issue = () => {
           description={item.description}
           lat={item.lat}
           lng={item.lng}
+          isDone={item.isDone}
         />
         {userContext.login && (
-          <Button onClick={() => navigate(generatePath('/edit/:id', { id: item._id }))}>
-            Редагувати
-          </Button>
+          <>
+            <div className={styles.buttonRow}>
+              <Button onClick={() => navigate(generatePath('/edit/:id', { id: item._id }))}>
+                Редагувати
+              </Button>
+            </div>
+            <div className={styles.buttonRow}>
+              <Button onClick={() => markAsDone(params.id)}>Помітити як виконане</Button>
+            </div>
+            {error && <ErrorMessage errorMessage={error}></ErrorMessage>}
+          </>
         )}
       </Layout>
     </>

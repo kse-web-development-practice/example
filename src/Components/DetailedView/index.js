@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import { Map } from '../Map'
 import styles from './styles.module.css'
 
-export const DetailedView = ({ title, lat, lng, description = '' }) => {
+export const DetailedView = ({ title, lat, lng, description = '', isDone = false }) => {
   return (
     <div className={styles.detailed}>
-      <h1 className={styles.title}>{title}</h1>
+      <h1 className={styles.title}>
+        {isDone ? <>✅</> : <>🚧</>} {title}
+      </h1>
 
       <section className={styles.description}>
         <p>{description}</p>
@@ -34,5 +36,6 @@ DetailedView.propTypes = {
   title: PropTypes.string.isRequired,
   lat: PropTypes.number.isRequired,
   lng: PropTypes.number.isRequired,
-  description: PropTypes.string
+  description: PropTypes.string,
+  isDone: PropTypes.bool
 }
