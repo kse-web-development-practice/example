@@ -32,7 +32,7 @@ async function update(item) {
     throw new Error(`Error: ${res.statusText}`)
   }
 
-  return true
+  return res.json()
 }
 
 async function create(title, lat, lng, description) {

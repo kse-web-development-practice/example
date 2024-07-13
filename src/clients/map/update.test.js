@@ -16,17 +16,24 @@ describe('Map Client', () => {
     describe('when new item is updated', () => {
       beforeEach(() => {
         fetchMocked.mockResolvedValue(
-          new Response('Modified', {
-            status: 200,
-            statusText: '200 Modified'
-          })
+          new Response(
+            JSON.stringify({
+              _id: 1
+            }),
+            {
+              status: 200,
+              statusText: '200 Modified'
+            }
+          )
         )
 
         mapClient.init('http://some.com', 'key', fetchMocked)
       })
 
       it('should not throw an error', async () => {
-        await expect(mapClient.update(dataToUpdate)).resolves.toBe(true)
+        await expect(mapClient.update(dataToUpdate)).resolves.toEqual({
+          _id: 1
+        })
       })
 
       it('should call endpoint', async () => {
