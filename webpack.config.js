@@ -3,6 +3,7 @@
 const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const dotenv = require('dotenv')
 
@@ -57,7 +58,19 @@ module.exports = (env) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: 'public/index.html'
+        template: 'public/index.html',
+        publicUrl: process.env.BASE_URL ?? '/'
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: 'public/assets/favicon.ico', to: 'favicon.ico' },
+          { from: 'public/assets/192.png', to: '192.png' },
+          { from: 'public/assets/512.png', to: '512.png' },
+          { from: 'public/assets/screenshot1.png', to: 'screenshot1.png' },
+          { from: 'public/assets/screenshot2.png', to: 'screenshot2.png' },
+          { from: 'public/manifest.json', to: 'manifest.json' },
+          { from: 'public/worker.js', to: 'worker.js' }
+        ]
       }),
       new ESLintPlugin({
         exclude: ['node_modules', 'dist'],

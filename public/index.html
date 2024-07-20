@@ -14,8 +14,29 @@
             }
         }
     </style>
+    <link rel="manifest" href="<%= htmlWebpackPlugin.options.publicUrl %>manifest.json" />
 </head>
 <body>
 <div id="app"></div>
+<script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/worker.js")
+          .then(serviceWorker => {
+              console.log("Service Worker registered: ", serviceWorker);
+          })
+          .catch(error => {
+              console.error("Error registering the Service Worker: ", error);
+          });
+    }
+
+    document.addEventListener("DOMContentLoaded", event => {
+        isBrowser = matchMedia("(display-mode: browser)").matches;
+        if (!isBrowser) {
+            window.moveTo(16, 16);
+            window.resizeTo(800, 600);
+        }
+    });
+</script>
 </body>
 </html>

@@ -1,0 +1,41 @@
+{
+  "short_name": "Pothole",
+  "name": "Pothole APP",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "screenshots" : [
+    {
+      "src": "screenshot1.png",
+      "sizes": "794x1714",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Homescreen of Pothole APP"
+    },
+    {
+      "src": "screenshot2.png",
+      "sizes": "3562x1828",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Homescreen of Pothole APP"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

@@ -4,6 +4,8 @@ import { Map } from '../Map'
 import styles from './styles.module.css'
 
 export const DetailedView = ({ title, lat, lng, description = '', isDone = false }) => {
+  const isOnline = window.navigator.onLine
+
   return (
     <div className={styles.detailed}>
       <h1 className={styles.title}>
@@ -14,7 +16,7 @@ export const DetailedView = ({ title, lat, lng, description = '', isDone = false
         <p>{description}</p>
       </section>
 
-      <Map points={[{ lat, lng }]} />
+      {isOnline && <Map points={[{ lat, lng }]} />}
 
       <table className={styles.table}>
         <tbody>
